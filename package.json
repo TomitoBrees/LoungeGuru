@@ -23,6 +23,7 @@
 	},
 	"dependencies": {
 		"bits-ui": "^2.8.10",
-		"phosphor-svelte": "^3.0.1"
+		"phosphor-svelte": "^3.0.1",
+		"pikaday": "^1.8.2"
 	}
 }
