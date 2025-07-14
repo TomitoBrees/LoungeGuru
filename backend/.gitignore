@@ -45,3 +45,4 @@ nb-configuration.xml
 .certs/
 
 db.env
+/src/main/resources/META-INF/privateKey.pem

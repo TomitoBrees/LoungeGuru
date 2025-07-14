@@ -3,7 +3,7 @@ package com.loungeguru;
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 
 @QuarkusIntegrationTest
-class ExampleResourceIT extends ExampleResourceTest
+class UserResourceIT extends UserResourceTest
 {
     // Execute the same tests but in packaged mode.
 }
