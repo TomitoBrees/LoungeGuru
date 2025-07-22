@@ -5,6 +5,9 @@
     </div>
     <div>
         <button class="btn btn-lg btn-ghost">Reservations</button>
-        <button class="btn btn-lg btn-primary">Login</button>
+
+        <a href="/login">
+            <button class="btn btn-lg btn-primary">Login</button>
+        </a>
     </div>
 </nav>
