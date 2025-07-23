@@ -1,4 +1,5 @@
 <script>
+
 </script>
 
 <div class="flex min-h-screen w-full items-center justify-center gap-16">
@@ -19,40 +20,44 @@
 
     <div>
 
-        <fieldset class="fieldset rounded-box w-sm p-4">
+        <form method="POST">
+            <fieldset class="fieldset rounded-box w-sm p-4">
 
-            <label class="label">Email</label>
-            <input type="email" class="input w-sm" placeholder="Email" />
+                <label class="label" for="email">Email</label>
+                <input type="email" class="input validator w-sm" placeholder="Email" name="email" id="email" required/>
 
-            <label class="label">Password</label>
-            <input type="password" class="input w-sm" placeholder="Password" />
+                <label class="label" for="password">Password</label>
+                <input type="password" class="input validator w-sm" placeholder="Password" name="password" id="password" required/>
 
-            <button class="btn btn-primary mt-4">Login</button>
-        </fieldset>
+                <button class="btn btn-primary mt-4">Login</button>
+            </fieldset>
+        </form>
 
         <div class="divider">OR</div>
 
-        <fieldset class="fieldset rounded-box w-sm p-4 pt-0">
+        <form>
+            <fieldset class="fieldset rounded-box w-sm p-4 pt-0">
 
-            <div class="flex fieldset">
-                <div class="fieldset">
-                    <label class="label">First Name</label>
-                    <input type="text" class="input" placeholder="First Name"/>
+                <div class="flex fieldset">
+                    <div class="fieldset">
+                        <label class="label">First Name</label>
+                        <input type="text" class="input" placeholder="First Name"/>
+                    </div>
+
+                    <div class="fieldset">
+                        <label class="label">Last Name</label>
+                        <input type="text" class="input" placeholder="Last Name"/>
+                    </div>
                 </div>
 
-                <div class="fieldset">
-                    <label class="label">Last Name</label>
-                    <input type="text" class="input" placeholder="Last Name"/>
-                </div>
-            </div>
+                <label class="label">Email</label>
+                <input type="email" class="input w-sm" placeholder="Email"/>
 
-            <label class="label">Email</label>
-            <input type="email" class="input w-sm" placeholder="Email" />
+                <label class="label">Password</label>
+                <input type="password" class="input w-sm" placeholder="Password"/>
 
-            <label class="label">Password</label>
-            <input type="password" class="input w-sm" placeholder="Password" />
-
-            <button class="btn btn-accent mt-4">Sign Up</button>
-        </fieldset>
+                <button class="btn btn-accent mt-4">Sign Up</button>
+            </fieldset>
+        </form>
     </div>
 </div>
