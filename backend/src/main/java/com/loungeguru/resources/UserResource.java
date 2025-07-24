@@ -31,7 +31,7 @@ public class UserResource
             User user = userService.createUser(request.email, request.firstName, request.lastName, request.password);
             return Response.status(Response.Status.CREATED).entity(user).build();
         } catch (ForbiddenException e) {
-            return Response.status(Response.Status.CONFLICT).build();
+            return Response.status(Response.Status.CONFLICT).entity("The user already exists.").build();
         }
     }
 
@@ -44,22 +44,12 @@ public class UserResource
         {
             Tokens tokens = userService.loginUser(request.email, request.password);
 
-            NewCookie refreshCookie = new NewCookie(
-                    "refreshToken",
-                    tokens.refreshToken,
-                    "/",
-                    null,
-                    null,
-                    60 * 60 * 24 * 30,
-                    false,
-                    true);
-
-            return Response.ok(Map.of("accessToken", tokens.accessToken)).cookie(refreshCookie).build();
+            return Response.ok(tokens).build();
         } catch (NotFoundException e)
         {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("The user doesn't exist").build();
         } catch (ForbiddenException e) {
-            return Response.status(Response.Status.FORBIDDEN).build();
+            return Response.status(Response.Status.FORBIDDEN).entity("The password is incorrect").build();
         }
     }
 
@@ -69,26 +59,16 @@ public class UserResource
     public Response refresh(@CookieParam("refreshToken") String refreshToken) {
         if (refreshToken == null)
         {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return Response.status(Response.Status.UNAUTHORIZED).entity("The refresh token wasn't found.").build();
         }
 
         try
         {
             Tokens tokens = userService.refreshToken(refreshToken);
 
-            NewCookie refreshCookie = new NewCookie(
-                    "refreshToken",
-                    tokens.refreshToken,
-                    "/",
-                    null,
-                    null,
-                    60 * 60 * 24 * 30,
-                    false,
-                    true);
-
-            return Response.ok(Map.of("accessToken", tokens.accessToken)).cookie(refreshCookie).build();
+            return Response.ok(tokens).build();
         } catch (ParseException e) {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid refresh token.").build();
         }
     }
 }

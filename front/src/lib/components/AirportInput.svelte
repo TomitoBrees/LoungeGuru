@@ -48,7 +48,7 @@
 >
     <div class="relative w-64">
         <AirTrafficControl
-                class="absolute left-3 top-1/2 -translate-y-1/2 size-5 text-base-content pointer-events-none"
+                class="absolute left-3 top-1/2 -translate-y-1/2 size-5 <text-base-content> pointer-events-none"
         />
 
         <Combobox.Input

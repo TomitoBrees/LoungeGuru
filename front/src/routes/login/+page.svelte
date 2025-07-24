@@ -1,5 +1,7 @@
 <script>
+    import {enhance} from "$app/forms";
 
+    let {form} = $props()
 </script>
 
 <div class="flex min-h-screen w-full items-center justify-center gap-16">
@@ -20,14 +22,30 @@
 
     <div>
 
-        <form method="POST">
+        {#if form?.error}
+            <div class="toast toast-top toast-left">
+                <div class="alert alert-error">
+                    <span>{form?.error}</span>
+                </div>
+            </div>
+        {/if}
+
+        <form method="POST" use:enhance>
             <fieldset class="fieldset rounded-box w-sm p-4">
 
                 <label class="label" for="email">Email</label>
-                <input type="email" class="input validator w-sm" placeholder="Email" name="email" id="email" required/>
+
+                <div class="indicator">
+                    <span class="indicator-item badge">Required</span>
+                    <input type="email" class="input validator w-sm" placeholder="Email" name="email" id="email" required/>
+                </div>
 
                 <label class="label" for="password">Password</label>
-                <input type="password" class="input validator w-sm" placeholder="Password" name="password" id="password" required/>
+
+                <div class="indicator">
+                    <span class="indicator-item badge">Required</span>
+                    <input type="password" class="input validator w-sm" placeholder="Password" name="password" id="password" required/>
+                </div>
 
                 <button class="btn btn-primary mt-4">Login</button>
             </fieldset>

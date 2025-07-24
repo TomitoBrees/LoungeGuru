@@ -3,13 +3,14 @@
     import {page} from '$app/stores';
 	import Navbar from "$lib/components/Navbar.svelte";
 
-	let { children } = $props();
+    /** @type {import('./$types').LayoutProps} */
+	let { data, children } = $props();
 
     let hideNavBar = $derived($page.route.id === '/login');
 </script>
 
 {#if !hideNavBar}
-    <Navbar />
+    <Navbar user={data.user}/>
 {/if}
 
 {@render children()}

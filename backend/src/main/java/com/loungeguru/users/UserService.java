@@ -78,9 +78,6 @@ public class UserService
 
         long now = Instant.now().getEpochSecond();
         if (parsed.getExpirationTime() < now) {
-            System.out.println("Here");
-            System.out.println(parsed.getExpirationTime());
-            System.out.println(now);
             throw new UnauthorizedException("Refresh token is expired. Need to log in again.");
         }
 
