@@ -30,7 +30,7 @@
             </div>
         {/if}
 
-        <form method="POST" use:enhance>
+        <form method="POST" action="?/login">
             <fieldset class="fieldset rounded-box w-sm p-4">
 
                 <label class="label" for="email">Email</label>
@@ -53,26 +53,26 @@
 
         <div class="divider">OR</div>
 
-        <form>
+        <form method="POST" action="?/register">
             <fieldset class="fieldset rounded-box w-sm p-4 pt-0">
 
                 <div class="flex fieldset">
                     <div class="fieldset">
-                        <label class="label">First Name</label>
-                        <input type="text" class="input" placeholder="First Name"/>
+                        <label class="label" for="firstName">First Name</label>
+                        <input type="text" class="input" placeholder="First Name" name="firstName" id="firstName" required/>
                     </div>
 
                     <div class="fieldset">
-                        <label class="label">Last Name</label>
-                        <input type="text" class="input" placeholder="Last Name"/>
+                        <label class="label" for="lastName">Last Name</label>
+                        <input type="text" class="input" placeholder="Last Name" name="lastName" id="lastName" required/>
                     </div>
                 </div>
 
-                <label class="label">Email</label>
-                <input type="email" class="input w-sm" placeholder="Email"/>
+                <label class="label" for="registerEmail">Email</label>
+                <input type="email" class="input w-sm" placeholder="Email" name="registerEmail" id="registerEmail" required/>
 
-                <label class="label">Password</label>
-                <input type="password" class="input w-sm" placeholder="Password"/>
+                <label class="label" for="registerPassword">Password</label>
+                <input type="password" class="input w-sm" placeholder="Password" name="registerPassword" id="registerPassword" required/>
 
                 <button class="btn btn-accent mt-4">Sign Up</button>
             </fieldset>

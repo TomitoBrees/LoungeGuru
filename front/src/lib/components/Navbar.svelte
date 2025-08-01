@@ -1,10 +1,18 @@
 <script>
     import User from "phosphor-svelte/lib/user";
     import SignOut from "phosphor-svelte/lib/SignOut";
+    import {goto, invalidateAll} from "$app/navigation";
+
     let { user } = $props();
 
     function getInitials() {
         return user.firstName.charAt(0) + user.lastName.charAt(0);
+    }
+
+    async function logout() {
+        await fetch('/api/logout', { method: 'POST' });
+        await invalidateAll();
+        goto('/');
     }
 </script>
 
@@ -18,7 +26,7 @@
 
         {#if user}
             <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button"  class="avatar avatar-placeholder">
+                <div tabindex="0" role="button"  class="avatar avatar-placeholder cursor-pointer">
                     <div class="bg-accent text-neutral-content w-10 rounded-full">
                         <span class="text-md">{getInitials()}</span>
                     </div>
@@ -31,7 +39,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="group text-error hover:bg-error hover:text-error-content">
+                        <a class="group text-error hover:bg-error hover:text-error-content" onclick={logout}>
                             <SignOut class="text-error group-hover:text-error-content" />
                             Logout
                         </a>
