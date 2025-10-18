@@ -25,4 +25,17 @@ public class AirportService
             throw new NotFoundException("The airport with the given IATA code wasn't found");
         }
     }
+
+    public Airport[] getAllAirports()
+    {
+        Airport[] airports = airportRepository.listAll().toArray(new Airport[0]);
+        if (airports.length > 0)
+        {
+            return airports;
+        }
+        else
+        {
+            throw new NotFoundException("No airport was found");
+        }
+    }
 }

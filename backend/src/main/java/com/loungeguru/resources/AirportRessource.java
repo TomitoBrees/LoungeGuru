@@ -27,4 +27,16 @@ public class AirportRessource
             return Response.status(Response.Status.NOT_FOUND).entity("The airport wasn't found.").build();
         }
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllAirports() {
+        try
+        {
+            Airport[] airports = airportService.getAllAirports();
+            return Response.status(Response.Status.FOUND).entity(airports).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity("The airport wasn't found.").build();
+        }
+    }
 }
