@@ -1,34 +1,17 @@
+import {refreshUser} from "$lib/services/userService.js";
+import {getAllAirports} from "$lib/services/airportService.js";
+
+let cachedAirports = null;
+let lastCached = null;
+const cachedLifetime = 5 * 60 * 1000;
+
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ cookies, fetch }) {
-    let token = cookies.get('accessToken');
 
-    if (!token) {
-        const res = await fetch('http://localhost:8080/users/refresh', {
-            method: 'POST',
-            credentials: 'include'
-        });
+    let user = await refreshUser(cookies, fetch);
+    let airports = await getAllAirports({cachedAirports, lastCached, cachedLifetime});
 
-        if (res.ok) {
-            const data = await res.json();
-            token = data.accessToken;
+    console.log(user);
 
-            cookies.set('accessToken', token, {
-                path: '/',
-                httpOnly: false,
-                sameSite: 'strict',
-                maxAge: 60 * 60,
-                secure: false
-            });
-        } else {
-            return { user: null };
-        }
-    }
-
-    try {
-        const [, payload] = token.split('.');
-        const decoded = JSON.parse(atob(payload));
-        return { user: decoded };
-    } catch (err) {
-        return { user: null };
-    }
+    return {user: user, airports: airports}
 }

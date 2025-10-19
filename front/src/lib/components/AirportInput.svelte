@@ -7,34 +7,19 @@
     import CaretDoubleDown from "phosphor-svelte/lib/CaretDoubleDown";
     import AirTrafficControl from "phosphor-svelte/lib/AirTrafficControl";
 
-    const fruits = [
-        { value: "mango", label: "Mango" },
-        { value: "watermelon", label: "Watermelon" },
-        { value: "apple", label: "Apple" },
-        { value: "pineapple", label: "Pineapple" },
-        { value: "orange", label: "Orange" },
-        { value: "grape", label: "Grape" },
-        { value: "strawberry", label: "Strawberry" },
-        { value: "banana", label: "Banana" },
-        { value: "kiwi", label: "Kiwi" },
-        { value: "peach", label: "Peach" },
-        { value: "cherry", label: "Cherry" },
-        { value: "blueberry", label: "Blueberry" },
-        { value: "raspberry", label: "Raspberry" },
-        { value: "blackberry", label: "Blackberry" },
-        { value: "plum", label: "Plum" },
-        { value: "apricot", label: "Apricot" },
-        { value: "pear", label: "Pear" },
-        { value: "grapefruit", label: "Grapefruit" }
-    ];
+    let {airports} = $props();
+
+    let airportOptions = $derived(airports.map(airport => ({value: airport.iata, label: `${airport.city} (${airport.iata})`})));
 
     let searchValue = $state("");
 
-    const filteredFruits = $derived(
+    // Absolutely need to re-work on that search! To slow when inputting the first letter.
+    // Probably need to do it in the BE or use a library (like fuse.js)
+    const filteredAirports = $derived(
         searchValue === ""
-            ? fruits
-            : fruits.filter((fruit) =>
-                fruit.label.toLowerCase().includes(searchValue.toLowerCase())
+            ? airportOptions
+            : airportOptions.filter((airport) =>
+                airport.label.toLowerCase().includes(searchValue.toLowerCase())
             )
     );
 </script>
@@ -75,14 +60,14 @@
             </Combobox.ScrollUpButton>
 
             <Combobox.Viewport class="p-1">
-                {#each filteredFruits as fruit, i (i + fruit.value)}
+                {#each filteredAirports as airport, i (i + airport.value)}
                     <Combobox.Item
                             class="flex items-center justify-between px-5 py-2 text-sm capitalize rounded-md cursor-pointer hover:bg-primary hover:text-accent-content"
-                            value={fruit.value}
-                            label={fruit.label}
+                            value={airport.value}
+                            label={airport.label}
                     >
                         {#snippet children({ selected })}
-                            {fruit.label}
+                            {airport.label}
                         {/snippet}
                     </Combobox.Item>
                 {:else}

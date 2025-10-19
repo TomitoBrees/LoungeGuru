@@ -1,6 +1,8 @@
 <script>
     import AirportInput from "$lib/components/AirportInput.svelte";
     import DateInput from "$lib/components/DateInput.svelte";
+
+    let { airports } = $props()
 </script>
 
 <header class="hero relative mb-24">
@@ -22,7 +24,7 @@
                 Skip the crowds, relax before your flight
             </p>
             <div class="flex gap-32 justify-center">
-                <AirportInput/>
+                <AirportInput airports={airports}/>
                 <DateInput />
             </div>
         </div>

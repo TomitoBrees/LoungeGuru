@@ -31,18 +31,18 @@
                         <span class="text-md">{getInitials()}</span>
                     </div>
                 </div>
-                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 mt-2 shadow-md border border-base-200">
+                <ul class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 mt-2 shadow-md border border-base-200">
                     <li>
-                        <a class="group text-accent hover:bg-accent hover:text-accent-content">
+                        <button class="group text-accent hover:bg-accent hover:text-accent-content" role="link">
                             <User class="text-accent group-hover:text-accent-content"/>
                             Profile
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a class="group text-error hover:bg-error hover:text-error-content" onclick={logout}>
+                        <button class="group text-error hover:bg-error hover:text-error-content" onclick={logout}>
                             <SignOut class="text-error group-hover:text-error-content" />
                             Logout
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
