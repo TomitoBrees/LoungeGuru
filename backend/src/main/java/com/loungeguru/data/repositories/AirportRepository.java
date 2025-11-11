@@ -5,10 +5,16 @@ import com.loungeguru.data.models.User;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.List;
+
 @ApplicationScoped
 public class AirportRepository implements PanacheMongoRepository<Airport>
 {
     public Airport findByIATA(String iata) {
         return find("iata", iata).firstResult();
+    }
+
+    public List<Airport> findPopular() {
+        return find("ranking > ?1", 0).list();
     }
 }

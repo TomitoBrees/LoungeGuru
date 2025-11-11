@@ -26,16 +26,29 @@ public class AirportService
         }
     }
 
-    public Airport[] getAllAirports()
+    public List<Airport> getAllAirports()
     {
-        Airport[] airports = airportRepository.listAll().toArray(new Airport[0]);
-        if (airports.length > 0)
+        List<Airport> airports = airportRepository.listAll();
+        if (!airports.isEmpty())
         {
             return airports;
         }
         else
         {
             throw new NotFoundException("No airport was found");
+        }
+    }
+
+    public List<Airport> getPopularAirports()
+    {
+        List<Airport> popularAirports = airportRepository.findPopular();
+        if (!popularAirports.isEmpty())
+        {
+            return popularAirports;
+        }
+        else
+        {
+            throw new NotFoundException("No popular airport was found");
         }
     }
 }

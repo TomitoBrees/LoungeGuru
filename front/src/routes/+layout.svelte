@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
     import { page } from '$app/state';
-    import Navbar from "$lib/components/Navbar.svelte";
+    import Navbar from "$lib/components/shared/Navbar.svelte";
 
     /** @type {import('./$types').LayoutProps} */
 	let { data, children } = $props();

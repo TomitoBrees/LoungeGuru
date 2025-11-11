@@ -16,11 +16,9 @@
     // Absolutely need to re-work on that search! To slow when inputting the first letter.
     // Probably need to do it in the BE or use a library (like fuse.js)
     const filteredAirports = $derived(
-        searchValue === ""
-            ? airportOptions
-            : airportOptions.filter((airport) =>
-                airport.label.toLowerCase().includes(searchValue.toLowerCase())
-            )
+        searchValue.length < 3 ?
+            airportOptions :
+            airportOptions.filter((airport) => airport.label.toLowerCase().includes(searchValue.toLowerCase()))
     );
 </script>
 

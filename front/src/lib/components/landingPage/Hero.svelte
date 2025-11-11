@@ -1,11 +1,11 @@
 <script>
-    import AirportInput from "$lib/components/AirportInput.svelte";
-    import DateInput from "$lib/components/DateInput.svelte";
+    import AirportInput from "$lib/components/landingPage/AirportInput.svelte";
+    import DateInput from "$lib/components/landingPage/DateInput.svelte";
 
     let { airports } = $props()
 </script>
 
-<header class="hero relative mb-24">
+<header class="hero relative mb-24 mt-32">
 
     <img src="/illustrations/left-illustration.svg"
          alt="a woman with airborne objects"

@@ -10,6 +10,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.List;
+
 @Path("/airports")
 public class AirportRessource
 {
@@ -22,7 +24,7 @@ public class AirportRessource
         try
         {
             Airport airport = airportService.getAirport(request.iata);
-            return Response.status(Response.Status.FOUND).entity(airport).build();
+            return Response.status(Response.Status.OK).entity(airport).build();
         } catch (NotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).entity("The airport wasn't found.").build();
         }
@@ -33,10 +35,22 @@ public class AirportRessource
     public Response getAllAirports() {
         try
         {
-            Airport[] airports = airportService.getAllAirports();
-            return Response.status(Response.Status.FOUND).entity(airports).build();
+            List<Airport> airports = airportService.getAllAirports();
+            return Response.status(Response.Status.OK).entity(airports).build();
         } catch (NotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).entity("The airport wasn't found.").build();
+            return Response.status(Response.Status.NOT_FOUND).entity("No airport was found.").build();
+        }
+    }
+
+    @Path("/popular")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPopularAirports() {
+        try {
+            List<Airport> popularAirports = airportService.getPopularAirports();
+            return Response.status(Response.Status.OK).entity(popularAirports).build();
+        } catch (NotFoundException e) {
+            return Response.status(Response.Status.NOT_FOUND).entity("No popular airport was found").build();
         }
     }
 }

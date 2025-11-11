@@ -15,4 +15,5 @@ public class Airport extends PanacheMongoEntity
     public String image;
     public String name;
     public List<Lounge> lounges;
+    public Integer ranking;
 }
